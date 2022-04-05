@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>MVC</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://assets.codepen.io/1674766/promise.js" async></script>
+
+</head>
+
+<body>
+
+	<header>
+		<nav class="btn-group">
+			<button class="btn btn-dark btn-sm" id="btnStart" title="Connect">connect</button>
+			<button class="btn btn-dark btn-sm" id="btnStop" disabled>disconnect</button>
+		</nav>
+		<nav>
+			<pre id="pre"></pre>
+			<a class="btn btn-sm text-muted" href="#" id="logDisplay"></a>
+		</nav>
+	</header>
+
+	<main id="main" role="main" class="environment dev">
+
+		<article role="article">
+			<pre></pre>
+		</article>
+
+	</main>
+
+	<footer>
+		<nav class="btn-group">
+
+		</nav>
+	</footer>
+
+	<script id="js">
+		/* console log proxy */
+		(function(document){
+			var alias = console.log;
+			var article = document.querySelector('article pre');
+			var fragment = document.createDocumentFragment();
+			document.log = function(string){
+				alias.apply(console, arguments);
+				fragment.appendChild(document.createTextNode(string));
+				fragment.appendChild(document.createElement('br'));
+				article.insertBefore(fragment, article.childNodes[0]);
+			};
+			console.log = document.log;
+		})(document);
+	</script>
+
+	<script src="utility.js"></script>
+	<script src="handler.js"></script>
+	<script src="store.js"></script>
+	<script src="model.js"></script>
+	<script src="template.js"></script>
+	<script src="view.js"></script>
+	<script src="controller.js"></script>
+	<script src="main.js"></script>
+
+</body>
+</html>
